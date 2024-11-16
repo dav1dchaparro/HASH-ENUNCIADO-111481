@@ -233,7 +233,7 @@ bool hash_insertar(hash_t *hash, char *clave, void *valor, void **encontrado)
 	return inserto_en_lista(hash, anterior, clave, valor, encontrado);
 }
 
-void *hash_obtener(hash_t *hash, const char *clave)
+void *hash_buscar(hash_t *hash, char *clave)
 {
 	if ((!hash) || (!clave))
 		return NULL;
@@ -322,18 +322,9 @@ void *hash_quitar(hash_t *hash, char *clave)
 	}
 	return quito_de_primera_posicion(hash, posicion);
 }
-/**
- * Itera cada elemento del hash y aplica la función f.
- *
- * La iteración se corta al completar el total de elementos o cuando la función devuelve false.
- *
- * Devuelve la cantidad de veces que se aplica la función.
- */
-size_t hash_iterar(hash_t *hash, bool (*f)(char *, void *, void *), void *ctx);
 
-size_t hash_con_cada_clave(hash_t *hash,
-			   bool (*f)(char *clave, void *valor, void *aux),
-			   void *ctx)
+size_t hash_iterar(hash_t *hash, bool (*f)(char *clave, void *valor, void *aux),
+		   void *ctx)
 {
 	if ((!hash) || (!f))
 		return 0;
